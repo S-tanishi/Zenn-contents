@@ -12,3 +12,9 @@ https://vue-loader-v14.vuejs.org/ja/start/spec.html
 1. template内には 
 実際に表示させる処理
 2. script内
+import
+export() {
+    computed:
+    methods:
+}
+
