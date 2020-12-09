@@ -111,3 +111,32 @@ watchの利点は以下の場合
 computedプロパティでは処理できない非同期通信などの複雑な処理を行う場合
 更新前と更新後の値を使う場合
 処理を実行しても、データは返さない場合
+
+### methods　プロパティ
+computedプロパティ内に記述していた関数をmethodsプロパティに記述し、テンプレート構文でその関数を呼び出すだけ。
+```js:
+var vm = new Vue({
+  el: '#example',
+  data: {
+    firstNum:3,
+    secondNum:4
+  },
+  methods: {
+    // 算出 getter 関数
+   calcNum: function () {
+      // `this` は vm インスタンスを指します
+      return this.firstNum * this.secondNum
+    }
+  }
+})
+```
+```html:
+<div id="example">
+  <p>{{ calcNum() }}</p> 
+</div>
+```
+。pタグの要素には常に、calcNumの計算結果の戻り値が表示されるようになります。（methodsプロパティを用いているので必ず()をつけることに注意しましょう。）
+
+methodsプロパティはv-onのハンドラ関数としても利用できるなどの汎用性の高さがメリットとしてあげられます。
+
+computedプロパティは関数内の変数に変更があるときだけ再計算されます。変更がない場合はキャッシュが利用されるため、余計な計算を行うことがなくなるのがメリットです。
