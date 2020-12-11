@@ -49,24 +49,25 @@ v-if: 式の結果に応じてDOM要素を追加・削除
 フォームに不正な値が入力された時に赤く表示するなど、そんな時に使う。
 
 動的に切り替えたい属性に切り替えるための変数を紐づけしておくだけでこれらを実現してくれる
+
 ```html:
-v-bind: 属性名="データを展開した属性値"
+v-bind:属性名="データを展開した属性値"
 v-bind:class="オブジェクト・配列"
 v-bind:style="オブジェクト・配列"
+
+// 省略
+v-bind:属性名　→ :属性名
 ```
 
-v-bind:classとv-bind:styleについてVueは特別な記法を用意している。
 input要素のvalue属性を紐付ける場合はv-modelを用いると便利である。
 ### v-bind:class
-クラスの属性を切り替えることができる
-
 以下の場合、canBuyが偽であるならclassの属性がerrorに
 ```html:
 <p v-bind:class ="{error: !canBuy"}>
   500円以上から購入できます
 </p>
 ```
-大規模になるにつれプロパティの数や値の式が複雑になりメンテナンスが困難に
+大規模になるにつれプロパティの数や値の式が複雑になりメンテナンスが困難に。
 その場合、テンプレートに直接記述するのではなく算出プロパティとしてVueインスタンスに移すべし
 ```js:
 computed: {
@@ -82,6 +83,21 @@ computed: {
   500円以上から購入できます
 </p>
 ```
+### v-bind:style
+```js:computed内
+errorMessageStyle: function () {
+  return {
+    border: this.canBuy ? '' '1px solid red',
+    color: this.canBuy ? '' : 'red'
+  }
+}
+```
+```html:
+<p :style="errorMessageStyle">
+  500円以上から交流できます
+</p>
+```
+
 
 
 @click
