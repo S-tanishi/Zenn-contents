@@ -143,7 +143,7 @@ v-on:change(input),とv-bind:valueを使う。
 
 input要素などのvalue属性をv-bindでバインディングし、changeイベントに対してVueの変数にvalue属性の値を代入することで実装できます
 
-2. script内
+## 2. script内
 import
 export() {
     computed: {
