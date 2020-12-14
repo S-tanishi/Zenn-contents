@@ -75,9 +75,6 @@ const app = new Vue({
 });
 
 ```
-
-memo:ネットで参考にしたrequireとwindowの方法では繋がらなかった
-
 ## blade
 例を見た方が早いのでwelcome.blade.phpを編集
 
