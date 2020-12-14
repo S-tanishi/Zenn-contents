@@ -3,7 +3,7 @@ title: "laravel８系でVue.jsを連携するまで 備忘録"
 emoji: "🔥"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel, vue]
-published: false
+published: true
 ---
 ### 前提知識
 Laravel6.0以降は自前でVue.jsをインストールし、resources/js/app.jsを編集する必要がある。（前は標準搭載
