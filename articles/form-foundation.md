@@ -3,7 +3,7 @@ title: "form"
 emoji: "🌊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [html, php]
-published: false
+published: true
 ---
 ### form :データの送信
 form要素で囲った中で、
