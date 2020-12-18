@@ -15,6 +15,8 @@ npm run watch でエラー
 
 docker-compose exec web npm install 
 
+docker-compose exec web npm install -D vue
+
 docker-compose exec web npm install --save vue-router
 
 docker-compose exec web npm run watch
