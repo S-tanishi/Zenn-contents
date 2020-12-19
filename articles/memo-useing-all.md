@@ -22,3 +22,6 @@ docker-compose exec web npm install --save vue-router
 docker-compose exec web npm run watch
 
 で解決
+
+分ける方法、Sanctumで利用or使わない
+
