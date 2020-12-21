@@ -181,4 +181,4 @@ v-if="dateList.some(date => date.ymd === dateToYYYYMMDD(props.day.date))"
           ・{{content}}
         </div>
 ```
-が表示される
+が評価されcontentが描写される
