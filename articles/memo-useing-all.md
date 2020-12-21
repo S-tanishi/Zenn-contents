@@ -182,3 +182,10 @@ v-if="dateList.some(date => date.ymd === dateToYYYYMMDD(props.day.date))"
         </div>
 ```
 が評価されcontentが描写される
+
+公式：https://vcalendar.io/installation.html
+
+npm install v-calendar
+
+Import and use VCalendar
+
