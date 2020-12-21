@@ -27,6 +27,8 @@ docker-compose exec web npm run watch
 
 
 ### v-calendar ライブラリ
+参考：https://qiita.com/kanary/items/442bd44c2896a534768b
+
 npm install v-calender でインストール
 
 main.jsについては、Vueにv-calendarを読み込ませているだけ
