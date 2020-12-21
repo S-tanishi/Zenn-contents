@@ -154,3 +154,31 @@ export default {
 }
 </style>
 ```
+data部分
+これらの配列が今回表示したいデータ。ymdがキーとなる
+
+カレンダーを呼び出す際にプロパティ指定
+２列のカレンダーとし、ヘッダを中央に寄せるような設定
+```html:
+<v-calendar
+    :columns="2"
+    title-position="center"
+    >
+```
+
+props.day.dateから取得した日付オブジェクトがdateListに存在するかどうかを見ています
+
+```html:
+v-if="dateList.some(date => date.ymd === dateToYYYYMMDD(props.day.date))"
+```
+
+存在している日付に限り、中の
+```html
+        <div 
+        class="cell-content-line" 
+        v-for="content in getContentFromKey(dateToYYYYMMDD(props.day.date))" 
+        v-bind:key="content">
+          ・{{content}}
+        </div>
+```
+が表示される
