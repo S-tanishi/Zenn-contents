@@ -198,3 +198,35 @@ API Apprication Programing Interface
 APIはソフトウェア同士を繋げます
 
 APIを公開する、とはわかりやすく言うと、ソフトウェアにAPIという外部とやりとりする窓口を作り、外部アプリとコミュニケーションや連携ができる状態にする、ということ
+
+### laravel nuxt.js 
+laravek Api
+```php:routes/api.php 
+// 認証済の管理者のみAPIを実行できるように
+Route::group(["middleware" => "api"], function () {
+    Route::post('/login', 'Auth\LoginController@login');
+    Route::get('/current_admin_user', function () {
+        return Auth::user();
+    });
+    //追加
+    Route::group(['middleware' => ['auth:api']], function () {
+        //ここに認証が必要なパスを書いていく
+    });
+});
+```
+```
+php artisan make:controller Api/AdminUserController --resource --api
+```
+```php:routes/api.php 
+// 管理者のCRUD機能用のルーティングを作成
+Route::group(["middleware" => "api"], function () {
+    Route::post('/login', 'Auth\LoginController@login');
+    Route::get('/current_admin_user', function () {
+        return Auth::user();
+    });
+    Route::group(['middleware' => ['auth:api']], function () {
+        //追加
+        Route::apiResource('admin_users', 'Api\AdminUserController')->except(['show']);
+    });
+});
+```
