@@ -338,36 +338,7 @@ Laravel公式にnginxの設定例が用意されている
 https://readouble.com/laravel/7.x/ja/deployment.html
 ```
 server {
-    listen 80;
-    server_name example.com;
-    root /work/public;
-
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
-
-    index index.php;
-
-    charset utf-8;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    error_page 404 /index.php;
-
-    location ~ \.php$ {
-        fastcgi_pass app:9000;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-
-    location ~ /\.(?!well-known).* {
-        deny all;
-    }
+    # 省略
 }
 ```
 
@@ -423,4 +394,22 @@ default-character-set = utf8mb4
 
 [client]
 default-character-set = utf8mb4
+```
+
+```
+# イメージの指定
+FROM node:10.14.1-alpine
+
+# コンテナ内で cd /app しているようなもの
+WORKDIR /app
+
+# コマンド実行
+# linux 最新化,gitのインストール、npm最新化、vue-cli インストール　をしている。
+RUN apk update && \
+    apk add git && \
+    npm install -g npm && \
+    npm install -g vue-cli
+
+ENV HOST 0.0.0.0
+EXPOSE 8080
 ```

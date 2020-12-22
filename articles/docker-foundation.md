@@ -37,6 +37,10 @@ FROM イメージ名:タグ名 で指定します。
 ENV命令はコンテナ内のサーバー環境変数を設定
 
 SHELL命令は
+シェル形式のコマンドに使用されるデフォルトのシェルをオーバーライドすることができる
+ Linuxのデフォルトのシェルは["/bin/sh", "-c"] 、Windowsでは["cmd", "/S", "/C"]
+ SHELL命令は、Windows上で特に有用です
+https://riptutorial.com/ja/docker/example/11016/シェル命令
 
 WORKDIR
 コンテナ内で cd /app しているようなもの
@@ -45,19 +49,46 @@ WORKDIR
 phpベースイメージ
 https://hub.docker.com/_/php
 ### 文法
-
+#### build
 build: で指定しているのはビルドコンテキストを指定
 build contextとは
 docker buildを実行する際の現在の作業ディレクトリのことを指す
+Dockerfileの場所 
 
 ports
-volumes: 
+#### volumes: 
 ホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
-depends_on
+ホストOSとコンテナ内でソースコードを共有
+
+#### depends_on
+コンテナの依存関係を定義する。
+依存とは起動の順序に関係し、下記の例ではdbが起動してからwebが起動する
+```dockerfile:
+# appはdbに依存する
+app:
+  depends_on:
+      - db
+```
 links
 
+##### command コンテナ起動時のコマンド
 
-tty
-enviroment
-expose
+#### tty(標準出力の接続先デバイス)
+ポート待受とかしていないコンテナをdocker-compose upで起動するとコンテナがすぐ終了してしまう
+docker-compose.yml内にtty: trueと記述すると、docker-compose up でコンテナを起動させた際に、
+コンテナがすぐに終了してしまうのを防ぐことができます
 
+#### enviroment
+コンテナの環境変数を追加
+env_file との違いはdocker-comose.yamlに直接記述する点
+
+build オプションと合わせて指定すると、build中は enviroment で指定した、環境変数は見えないことに注意。
+build に変数を渡す場合は args オプションで指定する
+#### expose
+コンテナ内に限定して公開するポートを指定する
+公開されたポートは linked servicesからのみアクセス可能
+
+ホスト向けに公開したいのならportを使用
+
+#### links
+コンテナと他のサービスを繋げる
