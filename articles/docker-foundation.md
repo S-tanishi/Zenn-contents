@@ -29,12 +29,30 @@ STOPSIGNAL
 ### docker-compose.yml
 
 ### Dockerfile
+Dockerfileはテキストファイルであり、Dockerイメージを作り上げるために実行する命令をこのファイルに含めることができます
 
+FROM命令はイメージビルドのためのベースイメージを設定します。
+FROM イメージ名:タグ名 で指定します。
+
+ENV命令はコンテナ内のサーバー環境変数を設定
+
+SHELL命令は
+
+WORKDIR
+コンテナ内で cd /app しているようなもの
+
+
+phpベースイメージ
+https://hub.docker.com/_/php
 ### 文法
 
-build
+build: で指定しているのはビルドコンテキストを指定
+build contextとは
+docker buildを実行する際の現在の作業ディレクトリのことを指す
+
 ports
-volumes
+volumes: 
+ホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
 depends_on
 links
 
@@ -42,3 +60,4 @@ links
 tty
 enviroment
 expose
+
