@@ -189,3 +189,12 @@ npm install v-calendar
 
 Import and use VCalendar
 
+### API
+API Apprication Programing Interface
+
+インターフェイスとは、コンピュータ用語でいうと、「何か」と「何か」をつなぐもの
+
+「アプリケーション、ソフトウェア」と「プラグラム」をつなぐもの
+APIはソフトウェア同士を繋げます
+
+APIを公開する、とはわかりやすく言うと、ソフトウェアにAPIという外部とやりとりする窓口を作り、外部アプリとコミュニケーションや連携ができる状態にする、ということ
