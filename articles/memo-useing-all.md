@@ -230,3 +230,197 @@ Route::group(["middleware" => "api"], function () {
     });
 });
 ```
+
+### アプリケーションサーバ(app)コンテナ
+
+├── infra
+│   └── php
+│       ├── Dockerfile
+│       └── php.ini # PHPの設定ファイル
+├── backend # Laravelをインストールするディレクトリ
+└── docker-compose.yml
+
+```docker:docker-compose.yml
+services:
+  app: # => サービス名は任意
+    build: ./infra/php
+    volumes:
+      - ./backend:/work
+```
+build: で指定しているのはビルドコンテキストを指定
+build contextとは
+docker buildを実行する際の現在の作業ディレクトリのことを指す
+
+Dockerfile が置かれている ./infra/php ディレクトリをビルドコンテキストとして指定します
+Dockerビルドの際は Dockerfile のファイルを探すので、ファイル名の指定は不要
+
+volumes: ではホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
+今回はホスト側の ./backend ディレクトリをappサービスのコンテナ内 /work へマウントしてます。
+
+**./docker/php/Dockerfile を作成**
+Composerコマンドのインストール
+Laravelで必要なPHP拡張機能のインストール
+bcmath, pdo_mysql が不足しているので追加インストール
+```dockerfile:dockerfile
+FROM php:7.4-fpm-buster
+SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
+
+ENV COMPOSER_ALLOW_SUPERUSER=1 \
+  COMPOSER_HOME=/composer
+
+COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
+
+RUN apt-get update && \
+  apt-get -y install git unzip libzip-dev libicu-dev libonig-dev && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  docker-php-ext-install intl pdo_mysql zip bcmath
+
+COPY ./php.ini /usr/local/etc/php/php.ini
+
+WORKDIR /work
+```
+**php.ini はPHPの設定ファイル**
+PHPエラーメッセージの設定
+PHPエラーログの設定
+メモリ等の設定(お好みで)
+タイムゾーン設定
+文字コード設定
+
+```
+zend.exception_ignore_args = off
+expose_php = on
+max_execution_time = 30
+max_input_vars = 1000
+upload_max_filesize = 64M
+post_max_size = 128M
+memory_limit = 256M
+error_reporting = E_ALL
+display_errors = on
+display_startup_errors = on
+log_errors = on
+error_log = /dev/stderr
+default_charset = UTF-8
+
+[Date]
+date.timezone = Asia/Tokyo
+
+[mysqlnd]
+mysqlnd.collect_memory_statistics = on
+
+[Assertion]
+zend.assertions = 1
+
+[mbstring]
+mbstring.language = Japanese
+```
+### webコンテナ
+nginxウェブサーバーコンテナを作成します。
+nginxのベースイメージをそのまま利用し
+```dockerfile:docker-compose.yml
+  web:
+    image: nginx:1.18-alpine
+    ports:
+      - 10080:80
+    volumes:
+      - ./backend:/work
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /work
+```
+https://hub.docker.com/_/nginx
+
+port
+nginxへ外(ホスト側)からコンテナ内へアクセスさせるため公開用のポートを設定します。
+ホスト側:コンテナ側 と設定
+
+default.conf
+Laravel公式にnginxの設定例が用意されている
+https://readouble.com/laravel/7.x/ja/deployment.html
+```
+server {
+    listen 80;
+    server_name example.com;
+    root /work/public;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass app:9000;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+### dbコンテナ
+```dockerfile:docker-compose.yml
+    build: ./infra/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+volumes:
+  db-store:
+```
+```dockerfile:dockerfile
+FROM mysql:8.0
+
+ENV MYSQL_DATABASE=laravel_local \
+  MYSQL_USER=phper \
+  MYSQL_PASSWORD=secret \
+  MYSQL_ROOT_PASSWORD=secret \
+  TZ=Asia/Tokyo
+
+COPY ./my.cnf /etc/mysql/conf.d/my.cnf
+RUN chmod 644 /etc/mysql/conf.d/my.cnf
+```
+**my.cnf**
+文字コードの設定
+タイムゾーンの設定
+ログ設定
+```:my.cnf
+[mysqld]
+# character set / collation
+character_set_server = utf8mb4
+collation_server = utf8mb4_0900_ai_ci
+
+# timezone
+default-time-zone = SYSTEM
+log_timestamps = SYSTEM
+
+# Error Log
+log-error = mysql-error.log
+
+# Slow Query Log
+slow_query_log = 1
+slow_query_log_file = mysql-slow.log
+long_query_time = 1.0
+log_queries_not_using_indexes = 0
+
+# General Log
+general_log = 1
+general_log_file = mysql-general.log
+
+[mysql]
+default-character-set = utf8mb4
+
+[client]
+default-character-set = utf8mb4
+```
