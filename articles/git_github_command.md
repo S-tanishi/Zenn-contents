@@ -19,6 +19,8 @@ Git:分散型バーション管理システム
 https://tcd-theme.com/2019/12/what-is-git.html
 
 ### fetch marge pull
+https://qiita.com/osamu1203/items/cb94ef9da02e1ec3e921
+
 pull = fetch + merge origin/master
 
 git fetch
