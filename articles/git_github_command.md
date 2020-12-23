@@ -19,12 +19,16 @@ Git:分散型バーション管理システム
 https://tcd-theme.com/2019/12/what-is-git.html
 
 git fetch
-。fetchとはリモートリポジトリから最新情報をローカルリポジトリに持ってくるコマンド
+fetchとはリモートリポジトリから最新情報をローカルリポジトリに持ってくるコマンド
 
 fetchを行ったときに新しい更新があったとするとorigin/masterが最新になり、masterはその分の更新がまだ行われていない事になります。
 そこでmergeが必要になる
 
 git marge
+
+git pull
+上記の工程を一気に行うコマンド
+
 
 
 【git】error: failed to push some refs to "URL"
