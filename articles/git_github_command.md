@@ -17,3 +17,20 @@ Git:分散型バーション管理システム
 ローカル→add→インデックス→commit→ローカルリポジトリ→push→リモートリポジトリ
 
 https://tcd-theme.com/2019/12/what-is-git.html
+
+git fetch
+。fetchとはリモートリポジトリから最新情報をローカルリポジトリに持ってくるコマンド
+
+【git】error: failed to push some refs to "URL"
+
+https://qiita.com/chiaki-kjwr/items/118a5b3237c78d720582
+
+原因
+私がリモートでgithubのREADMEの変更を行っていたことが
+今回のエラーの原因
+
+「リモートのファイルがローカルのファイルも最新版だから、そのファイルにpushできないですよ
+
+git fetch 
+
+git margeで解決
