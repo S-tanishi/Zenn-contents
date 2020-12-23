@@ -21,6 +21,12 @@ https://tcd-theme.com/2019/12/what-is-git.html
 git fetch
 。fetchとはリモートリポジトリから最新情報をローカルリポジトリに持ってくるコマンド
 
+fetchを行ったときに新しい更新があったとするとorigin/masterが最新になり、masterはその分の更新がまだ行われていない事になります。
+そこでmergeが必要になる
+
+git marge
+
+
 【git】error: failed to push some refs to "URL"
 
 https://qiita.com/chiaki-kjwr/items/118a5b3237c78d720582
