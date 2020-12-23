@@ -18,8 +18,17 @@ Git:分散型バーション管理システム
 
 https://tcd-theme.com/2019/12/what-is-git.html
 
+### fetch marge pull
+pull = fetch + merge origin/master
+
 git fetch
 fetchとはリモートリポジトリから最新情報をローカルリポジトリに持ってくるコマンド
+
+fetchをしても、pullのようにファイルが更新されるわけではありません。
+あくまでもローカルリポジトリが更新されるだけ
+
+もっと詳しくいうと、例えばmasterブランチを使っているのであれば、
+origin/masterが更新されるということ
 
 fetchを行ったときに新しい更新があったとするとorigin/masterが最新になり、masterはその分の更新がまだ行われていない事になります。
 そこでmergeが必要になる
