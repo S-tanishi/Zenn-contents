@@ -461,3 +461,12 @@ Route::prefix('admin')->group(function() {
     });
 });
 ```
+
+Auth/Admin UserCpntroller作成
+LoginController作成
+
+config/app.php設定
+auth.php設定
+cors.php
+
+seeder
