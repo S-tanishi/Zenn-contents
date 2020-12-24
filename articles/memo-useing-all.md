@@ -439,3 +439,25 @@ yarn：yarn.lockファイルにより、バージョン違いの依存プログ�
 
 npm：遅い
 yarn：早い
+
+laravelのAPI化
+```php:api.php
+// 管理画面の機能として実装するのでPrefixにadminをつける
+Route::prefix('admin')->group(function() {
+    // 認証処理
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [LoginController::class, 'login']);
+    });
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/user', function () {
+            return Auth::user();
+        });
+
+        // Users
+        Route::resource('users', UserController::class)->only([
+            'index'
+        ]);
+    });
+});
+```
