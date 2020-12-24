@@ -25,3 +25,11 @@ Before MiddlewareもしくはAfter Middlewareの実装が完了したミドル�
 https://readouble.com/laravel/5.5/ja/middleware.html
 
 ミドルウェアの登録
+ミドルウェアはKernel.phpで登録して初めて使えるようになる
+
+ポイントは３つ
+・全ての処理に共通して処理を行う場合ーー＄middleware 
+・複数のミドルウェアをまとめて登録する場合ーー＄middleware Groupに登録
+・単体で使うミドルウェアを登録ーー＄route　middlewareにキーと共に登録
+
+https://laraweb.net/practice/1396/
