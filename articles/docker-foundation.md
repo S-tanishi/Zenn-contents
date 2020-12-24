@@ -60,6 +60,13 @@ ports
 ホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
 ホストOSとコンテナ内でソースコードを共有
 
+#### enviroment
+コンテナの環境変数を追加
+env_file との違いはdocker-comose.yamlに直接記述する点
+
+build オプションと合わせて指定すると、build中は enviroment で指定した、環境変数は見えないことに注意。
+build に変数を渡す場合は args オプションで指定する
+
 #### depends_on
 コンテナの依存関係を定義する。
 依存とは起動の順序に関係し、下記の例ではdbが起動してからwebが起動する
@@ -78,12 +85,6 @@ links
 docker-compose.yml内にtty: trueと記述すると、docker-compose up でコンテナを起動させた際に、
 コンテナがすぐに終了してしまうのを防ぐことができます
 
-#### enviroment
-コンテナの環境変数を追加
-env_file との違いはdocker-comose.yamlに直接記述する点
-
-build オプションと合わせて指定すると、build中は enviroment で指定した、環境変数は見えないことに注意。
-build に変数を渡す場合は args オプションで指定する
 #### expose
 コンテナ内に限定して公開するポートを指定する
 公開されたポートは linked servicesからのみアクセス可能
