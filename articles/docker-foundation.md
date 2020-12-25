@@ -31,7 +31,7 @@ STOPSIGNAL
 ### Dockerfile
 Dockerfileはテキストファイルであり、Dockerイメージを作り上げるために実行する命令をこのファイルに含めることができます
 
-FROM命令はイメージビルドのためのベースイメージを設定します。
+FROM命令はイメージビルドのためのベースイメージを設定
 FROM イメージ名:タグ名 で指定します。
 
 ENV命令はコンテナ内のサーバー環境変数を設定
@@ -78,6 +78,18 @@ app:
 ```
 links
 
+#### network:
+ビルド中にRUN命令のために接続するネットワークコンテナ
+
+#### networks:
+networks を最上位として，使用するネットワークを指定
+```dockerfile:
+services:
+  some-service:
+    networks:
+     - some-network
+     - other-network
+```
 ##### command コンテナ起動時のコマンド
 
 #### tty(標準出力の接続先デバイス)
@@ -85,11 +97,15 @@ links
 docker-compose.yml内にtty: trueと記述すると、docker-compose up でコンテナを起動させた際に、
 コンテナがすぐに終了してしまうのを防ぐことができます
 
+#### stdin_open
+コンテナの標準入力をオープンしたままにする
 #### expose
 コンテナ内に限定して公開するポートを指定する
 公開されたポートは linked servicesからのみアクセス可能
 
 ホスト向けに公開したいのならportを使用
-
+ 
 #### links
 コンテナと他のサービスを繋げる
+
+https://knowledge.sakura.ad.jp/5736/
