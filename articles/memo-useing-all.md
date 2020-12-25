@@ -454,7 +454,7 @@ Route::prefix('admin')->group(function() {
             return Auth::user();
         });
 
-        // Users
+        // Users　
         Route::resource('users', UserController::class)->only([
             'index'
         ]);
@@ -470,3 +470,36 @@ auth.php設定
 cors.php
 
 seeder
+
+### laravel Auth
+**Auth**
+認証（Ahthentication）や認可（Ahthorization）の意味。
+Laravelでは、デフォルトで認証機能があり、コマンドで作れる。
+**Jetstream**
+
+https://qiita.com/ucan-lab/items/7824d1293fef4698c212
+
+Laravel8の認証ライブラリ。
+Laravel〜5：make:auth、Laravel6〜7：laravel/uiに分離。Laravel8では、全部入り（Jetstream）になったんだとか。。
+Jetstream がやってくれることは、 ログイン、新規登録、メール検証、２段階認証、セッション管理、APIサポート(Laravel Sanctum)、チーム管理など。めっちゃやってくれる。。
+```
+① Jetstream のインストール
+composer require laravel/jetstream    
+
+② セットアップ ： JSのパッケージをインストール
+（ livewire と inertia を選択）
+php artisan jetstream:install livewire
+
+php artisan jetstream:install inertia          // vueやreactなどを使う場合は、コッチらしい。。
+
+③ マイグレーション実行
+% php artisan migrate            // usersテーブル、password_resetsテーブル作成のマイグレーションファイルが、自動生成されてる
+
+④ JSとCSSをビルド
+% npm install && npm run dev    // npmコマンドが無いエラーが出たら、Nodeのインストールが必要（https://nodejs.org/ja/）
+  // 若しくは、別々にNode.js と NPM をインストール
+  % npm install
+  % npm run dev
+// public/css/app.css、 public/js/app.js2ファイルが作成される
+```
+
