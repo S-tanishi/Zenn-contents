@@ -55,3 +55,25 @@ https://qiita.com/chiaki-kjwr/items/118a5b3237c78d720582
 git fetch 
 
 git margeで解決
+
+### 間違ってpushした場合の対処
+ローカルでrevertを使って取り消して、それをリモートへ反映する。
+revertは相殺で取り消すのでログからは消えない。（正確には取り消しではなくて打消し）
+resetだとログから完全に消えていまい危険なのでrevert推奨らしい。
+
+```
+$ git log
+
+commit XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX (HEAD -> main, origin/main)
+Author: XXXX <XXXXX@XXXX>
+Date:   Fri Dec 25 15:39:52 2020 +0900
+
+    add:xxxx
+
+```
+```
+$git revert <commit id>
+
+git push
+```
+```
