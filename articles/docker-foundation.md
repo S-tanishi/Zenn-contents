@@ -94,7 +94,7 @@ services:
 
 #### tty(標準出力の接続先デバイス)
 ポート待受とかしていないコンテナをdocker-compose upで起動するとコンテナがすぐ終了してしまう
-docker-compose.yml内にtty: trueと記述すると、docker-compose up でコンテナを起動させた際に、
+docker-compose up でコンテナを起動させた際に、
 コンテナがすぐに終了してしまうのを防ぐことができます
 
 #### stdin_open
@@ -107,5 +107,8 @@ docker-compose.yml内にtty: trueと記述すると、docker-compose up でコ�
  
 #### links
 コンテナと他のサービスを繋げる
+
+#### restart
+コンテナがすでに存在していた際の挙動を指定する
 
 https://knowledge.sakura.ad.jp/5736/
