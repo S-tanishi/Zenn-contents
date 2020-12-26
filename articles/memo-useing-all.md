@@ -504,4 +504,3 @@ php artisan jetstream:install inertia          // vueやreactなどを使う場�
   % npm run dev
 // public/css/app.css、 public/js/app.js2ファイルが作成される
 ```
-
