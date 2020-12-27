@@ -26,6 +26,9 @@ WORKDIR
 VOLUME
 STOPSIGNAL
 
+ADD XX CCC AAA &&\
+この&&で一括してADDを行える
+
 ### docker-compose.yml
 
 ### Dockerfile
@@ -112,3 +115,6 @@ docker-compose up でコンテナを起動させた際に、
 コンテナがすでに存在していた際の挙動を指定する
 
 https://knowledge.sakura.ad.jp/5736/
+
+## error
+Dockerfile のビルドで “/bin/sh: =: not found” と “returned a non-zero code: 127” エラー
