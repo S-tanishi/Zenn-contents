@@ -44,11 +44,13 @@ Seeder作成
 ### nuxt.js
 
 linux 最新化,gitのインストール、npm最新化、vue-cli インストール　をしている。
-RUN apk update && \
+```dockerfile:
+RUN 
+    apk update && \ 
     apk add git && \
     npm install -g npm && \
     npm install -g vue-cli
-
+```
 docker
 ui yarn create new-app
 
