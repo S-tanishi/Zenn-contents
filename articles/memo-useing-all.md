@@ -5,27 +5,6 @@ type: "tech" # tech: 技術記事 / idea: アイデア
 topics: []
 published: false
 ---
-docker-laravel-vue
-
-npm installもdocker
-
-npm run watch でエラー
-
-→dockerで環境を作ってるんだから、docker-compose のコンテナで起動しないとエラーはく
-
-docker-compose exec web npm install 
-
-docker-compose exec web npm install -D vue
-
-docker-compose exec web npm install --save vue-router
-
-docker-compose exec web npm run watch
-
-で解決
-
-分ける方法、Sanctumで利用or使わない
-
-
 ### v-calendar ライブラリ
 参考：https://qiita.com/kanary/items/442bd44c2896a534768b
 
@@ -189,15 +168,6 @@ npm install v-calendar
 
 Import and use VCalendar
 
-### API
-API Apprication Programing Interface
-
-インターフェイスとは、コンピュータ用語でいうと、「何か」と「何か」をつなぐもの
-
-「アプリケーション、ソフトウェア」と「プラグラム」をつなぐもの
-APIはソフトウェア同士を繋げます
-
-APIを公開する、とはわかりやすく言うと、ソフトウェアにAPIという外部とやりとりする窓口を作り、外部アプリとコミュニケーションや連携ができる状態にする、ということ
 
 ### laravel nuxt.js 
 laravek Api
@@ -231,172 +201,6 @@ Route::group(["middleware" => "api"], function () {
 });
 ```
 
-### アプリケーションサーバ(app)コンテナ
-
-├── infra
-│   └── php
-│       ├── Dockerfile
-│       └── php.ini # PHPの設定ファイル
-├── backend # Laravelをインストールするディレクトリ
-└── docker-compose.yml
-
-```docker:docker-compose.yml
-services:
-  app: # => サービス名は任意
-    build: ./infra/php
-    volumes:
-      - ./backend:/work
-```
-build: で指定しているのはビルドコンテキストを指定
-build contextとは
-docker buildを実行する際の現在の作業ディレクトリのことを指す
-
-Dockerfile が置かれている ./infra/php ディレクトリをビルドコンテキストとして指定します
-Dockerビルドの際は Dockerfile のファイルを探すので、ファイル名の指定は不要
-
-volumes: ではホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
-今回はホスト側の ./backend ディレクトリをappサービスのコンテナ内 /work へマウントしてます。
-
-**./docker/php/Dockerfile を作成**
-Composerコマンドのインストール
-Laravelで必要なPHP拡張機能のインストール
-bcmath, pdo_mysql が不足しているので追加インストール
-```dockerfile:dockerfile
-FROM php:7.4-fpm-buster
-SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
-
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-  COMPOSER_HOME=/composer
-
-COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
-
-RUN apt-get update && \
-  apt-get -y install git unzip libzip-dev libicu-dev libonig-dev && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  docker-php-ext-install intl pdo_mysql zip bcmath
-
-COPY ./php.ini /usr/local/etc/php/php.ini
-
-WORKDIR /work
-```
-**php.ini はPHPの設定ファイル**
-PHPエラーメッセージの設定
-PHPエラーログの設定
-メモリ等の設定(お好みで)
-タイムゾーン設定
-文字コード設定
-
-```
-zend.exception_ignore_args = off
-expose_php = on
-max_execution_time = 30
-max_input_vars = 1000
-upload_max_filesize = 64M
-post_max_size = 128M
-memory_limit = 256M
-error_reporting = E_ALL
-display_errors = on
-display_startup_errors = on
-log_errors = on
-error_log = /dev/stderr
-default_charset = UTF-8
-
-[Date]
-date.timezone = Asia/Tokyo
-
-[mysqlnd]
-mysqlnd.collect_memory_statistics = on
-
-[Assertion]
-zend.assertions = 1
-
-[mbstring]
-mbstring.language = Japanese
-```
-### webコンテナ
-nginxウェブサーバーコンテナを作成します。
-nginxのベースイメージをそのまま利用し
-```dockerfile:docker-compose.yml
-  web:
-    image: nginx:1.18-alpine
-    ports:
-      - 10080:80
-    volumes:
-      - ./backend:/work
-      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    working_dir: /work
-```
-https://hub.docker.com/_/nginx
-
-port
-nginxへ外(ホスト側)からコンテナ内へアクセスさせるため公開用のポートを設定します。
-ホスト側:コンテナ側 と設定
-
-default.conf
-Laravel公式にnginxの設定例が用意されている
-https://readouble.com/laravel/7.x/ja/deployment.html
-```
-server {
-    # 省略
-}
-```
-
-### dbコンテナ
-```dockerfile:docker-compose.yml
-    build: ./infra/mysql
-    volumes:
-      - db-store:/var/lib/mysql
-volumes:
-  db-store:
-```
-```dockerfile:dockerfile
-FROM mysql:8.0
-
-ENV MYSQL_DATABASE=laravel_local \
-  MYSQL_USER=phper \
-  MYSQL_PASSWORD=secret \
-  MYSQL_ROOT_PASSWORD=secret \
-  TZ=Asia/Tokyo
-
-COPY ./my.cnf /etc/mysql/conf.d/my.cnf
-RUN chmod 644 /etc/mysql/conf.d/my.cnf
-```
-**my.cnf**
-文字コードの設定
-タイムゾーンの設定
-ログ設定
-```:my.cnf
-[mysqld]
-# character set / collation
-character_set_server = utf8mb4
-collation_server = utf8mb4_0900_ai_ci
-
-# timezone
-default-time-zone = SYSTEM
-log_timestamps = SYSTEM
-
-# Error Log
-log-error = mysql-error.log
-
-# Slow Query Log
-slow_query_log = 1
-slow_query_log_file = mysql-slow.log
-long_query_time = 1.0
-log_queries_not_using_indexes = 0
-
-# General Log
-general_log = 1
-general_log_file = mysql-general.log
-
-[mysql]
-default-character-set = utf8mb4
-
-[client]
-default-character-set = utf8mb4
-```
-
-```
 # イメージの指定
 FROM node:10.14.1-alpine
 
@@ -404,15 +208,6 @@ FROM node:10.14.1-alpine
 WORKDIR /app
 
 # コマンド実行
-# linux 最新化,gitのインストール、npm最新化、vue-cli インストール　をしている。
-RUN apk update && \
-    apk add git && \
-    npm install -g npm && \
-    npm install -g vue-cli
-
-ENV HOST 0.0.0.0
-EXPOSE 8080
-```
 
 ### npm yarn
 Node.jsで動作するパッケージマネージャー
@@ -439,37 +234,6 @@ yarn：yarn.lockファイルにより、バージョン違いの依存プログ�
 
 npm：遅い
 yarn：早い
-
-laravelのAPI化
-```php:api.php
-// 管理画面の機能として実装するのでPrefixにadminをつける
-Route::prefix('admin')->group(function() {
-    // 認証処理
-    Route::prefix('auth')->group(function () {
-        Route::post('/login', [LoginController::class, 'login']);
-    });
-
-    Route::middleware('auth:api')->group(function () {
-        Route::get('/user', function () {
-            return Auth::user();
-        });
-
-        // Users　
-        Route::resource('users', UserController::class)->only([
-            'index'
-        ]);
-    });
-});
-```
-
-Auth/Admin UserCpntroller作成
-LoginController作成
-
-config/app.php設定
-auth.php設定
-cors.php
-
-seeder
 
 ### laravel Auth
 **Auth**
@@ -504,3 +268,18 @@ php artisan jetstream:install inertia          // vueやreactなどを使う場�
   % npm run dev
 // public/css/app.css、 public/js/app.js2ファイルが作成される
 ```
+
+### Alpine-Linux
+https://yoshinorin.net/2016/10/01/alpine-linux/
+
+### php-fpm
+https://qiita.com/kotarella1110/items/634f6fafeb33ae0f51dc
+
+FPM:FastCGI Process Manager
+PHP の FastCGI 実装のひとつで、 主に高負荷のサイトで有用な追加機能を用意
+CGI: Commom Gateway interface
+ウェブサーバ上でユーザプログラムを動作させるための仕組み
+
+Web サーバー 上で PHP ( 動的コンテンツを生成する言語 ) を動作せるための仕組み
+
+https://www.php.net/manual/ja/install.fpm.php
