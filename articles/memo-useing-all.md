@@ -283,3 +283,16 @@ CGI: Commom Gateway interface
 Web サーバー 上で PHP ( 動的コンテンツを生成する言語 ) を動作せるための仕組み
 
 https://www.php.net/manual/ja/install.fpm.php
+
+分離処理
+8,0のエラー問題
+
+ENV,COPYは関係ない
+
+
+問題が発生するのはRUN、パッケージインストールまあり
+今までの入れ方だと
+/bin/sh: apt-get: not found だが
+師匠の方だとエラーなしで通る
+
+どこかおかしいところがある
