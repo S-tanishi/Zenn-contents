@@ -7,6 +7,19 @@ published: false
 ---
 マニュアル
 https://emotion92.blog.fc2.com/blog-category-72-1.html
+
+### docker 
+"Docker allows you to package an application with all of its dependencies into a standardized unit for software development."
+
+全ての依存関係をパッケージ化して、コンテナとして動かす。
+
+→Linuxファイルシステムをdockerイメージとして
+
+パッケージ化するのは
+ルートディレクトリ以下、/bin /etc /var などの
+Linuxファイルシステム。それとメタ情報という
+どのプロセスを自動事項するのか、ポートを公開するのかも含まれる
+https://www.slideshare.net/zembutsu/what-isdockerdoing
 ### 基本
 dockerは Dockerfileからの命令を受け取り自動でイメージをビルドする
 
