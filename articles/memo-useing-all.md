@@ -289,3 +289,11 @@ https://www.fumi.org/neta/201205sv.html
 
 ### PHP variant
 cli, apache, fpm, ztsの４種類
+
+### php8.0 error 解決
+composerのバージョンが古かったので2.0に
+それだけではエラーが出る
+削除
+composer global require hirak/prestissimo
+追記
+mkdir /var/log/php
