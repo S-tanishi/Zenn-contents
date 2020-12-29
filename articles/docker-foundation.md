@@ -19,6 +19,8 @@ https://emotion92.blog.fc2.com/blog-category-72-1.html
 ルートディレクトリ以下、/bin /etc /var などの
 Linuxファイルシステム。それとメタ情報という
 どのプロセスを自動事項するのか、ポートを公開するのかも含まれる
+
+dockerイメージはイメージ・レイヤの積み重ね
 https://www.slideshare.net/zembutsu/what-isdockerdoing
 ### 基本
 dockerは Dockerfileからの命令を受け取り自動でイメージをビルドする
@@ -141,5 +143,15 @@ docker-compose up でコンテナを起動させた際に、
 
 https://knowledge.sakura.ad.jp/5736/
 
-## error
-Dockerfile のビルドで “/bin/sh: =: not found” と “returned a non-zero code: 127” エラー
+### memo
+composerを早くするプラグイン
+http://blog.tojiru.net/article/432944706.html
+
+```
+// install
+$ composer global require hirak/prestissimo
+
+//uninstall 
+$ composer global remove hirak/prestissimo
+```
+

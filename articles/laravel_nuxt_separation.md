@@ -26,6 +26,8 @@ Auth/Admin
   UserController
   LoginController
 
+docker-compose exec api php artisan make:controller Api\Admin\UserController
+
 Kernel.php(middleware-apiに追記)
 
 config

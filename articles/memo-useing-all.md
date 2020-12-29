@@ -284,15 +284,8 @@ Web サーバー 上で PHP ( 動的コンテンツを生成する言語 ) を�
 
 https://www.php.net/manual/ja/install.fpm.php
 
-分離処理
-8,0のエラー問題
+### php apache モジュール
+https://www.fumi.org/neta/201205sv.html
 
-ENV,COPYは関係ない
-
-
-問題が発生するのはRUN、パッケージインストールまあり
-今までの入れ方だと
-/bin/sh: apt-get: not found だが
-師匠の方だとエラーなしで通る
-
-どこかおかしいところがある
+### PHP variant
+cli, apache, fpm, ztsの４種類
