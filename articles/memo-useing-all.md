@@ -297,3 +297,15 @@ composerのバージョンが古かったので2.0に
 composer global require hirak/prestissimo
 追記
 mkdir /var/log/php
+
+token認証 Session認証
+
+Session認証はブラウザ側のクッキーにSessionIDもたせる処理だから
+
+フロントとバックが別れていても、通常のLaravelの認証処理を書いてあげればいけるんじゃないか？的な推測で
+
+20:25 のず CSRFというセキュリティの問題もあるので、できればSanctum使った方がいい。
+20:25 のず けどCORSでそれは弾けるので別にこれでもいいかなと。
+20:25 のず セキュリティは重ねて対策をしておいたほうがいいので、Sanctum使えって言われてる理由はそこにあるかな。
+
+WebのセキュリティについてはSQLインジェクションとCSRFとXSSぐらい覚えておけばいいと思う。
