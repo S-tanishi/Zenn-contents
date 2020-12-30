@@ -28,6 +28,9 @@ dockerイメージは、その他仮想マシンイメージのように一つ�
 コンテナを動かすための必要な依存関係をパッケージ化したものがdocker（読み込み専用）
 
 イメージ・レイヤは親子関係を持ち、見かけ上１つに見える
+
+コンテナ作成＝コンテナ用レイヤの作成
+
 https://www.slideshare.net/zembutsu/what-isdockerdoing
 ### 基本
 dockerは Dockerfileからの命令を受け取り自動でイメージをビルドする
