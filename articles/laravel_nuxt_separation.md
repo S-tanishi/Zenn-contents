@@ -56,6 +56,27 @@ RUN
 docker
 ui yarn create new-app
 
+```
+? Project name: blog
+? Programming language: JavaScript
+? Package manager: Yarn
+? UI framework: Bootstrap Vue
+? Nuxt.js modules: (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? Linting tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? Testing framework: None
+? Rendering mode: Single Page App
+? Deployment target: Server (Node.js hosting)
+? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? What is your GitHub username? nagi125
+? Version control system: None
+
+🎉  Successfully created project blog
+```
+
 yyyyy
 
 ディレクトリ完成
+
+$ docker-compose exec web yarn add @nuxtjs/auth @nuxtjs/axios @nuxtjs/proxy
+
+docker-compose exec web yarn add --dev sass sass-loader fibers
