@@ -80,3 +80,13 @@ yyyyy
 $ docker-compose exec web yarn add @nuxtjs/auth @nuxtjs/axios @nuxtjs/proxy
 
 docker-compose exec web yarn add --dev sass sass-loader fibers
+
+token認証 Session認証
+
+Session認証はブラウザ側のクッキーにSessionIDもたせる処理だから
+
+フロントとバックが別れていても、通常のLaravelの認証処理を書いてあげればいけるんじゃないか？的な推測で
+
+20:25 のず CSRFというセキュリティの問題もあるので、できればSanctum使った方がいい。
+20:25 のず けどCORSでそれは弾けるので別にこれでもいいかなと。
+20:25 のず セキュリティは重ねて対策をしておいたほうがいいので、Sanctum使えって言われてる理由はそこにあるかな。
