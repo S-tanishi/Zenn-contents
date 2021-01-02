@@ -18,6 +18,9 @@ Git:分散型バーション管理システム
 
 https://tcd-theme.com/2019/12/what-is-git.html
 
+### cp
+$ cp コピー元 コピー先
+$ cp fileA.txt dir/fileA_copy.txt
 ### fetch marge pull
 https://qiita.com/osamu1203/items/cb94ef9da02e1ec3e921
 
