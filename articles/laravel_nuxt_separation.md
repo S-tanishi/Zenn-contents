@@ -56,6 +56,8 @@ RUN
 docker
 ui yarn create new-app
 
+https://ja.nuxtjs.org/docs/2.x/get-started/installation/
+
 ```
 ? Project name: blog
 ? Programming language: JavaScript
