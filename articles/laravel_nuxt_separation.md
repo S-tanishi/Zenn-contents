@@ -9,19 +9,17 @@ published: false
 ### 概要
 laravelをAPIとしてフロントとバックを分離。SPA環境を構築
 ### laravel(API)
-そもそもAPIとは
-### API
+**APIとは**
 API Apprication Programing Interface
 
 インターフェイス：「何か」と「何か」をつなぐもの
 
 「アプリケーション、ソフトウェア」と「プラグラム」をつなぐもの
 APIはソフトウェア同士を繋げます
-
-APIを公開する、とはわかりやすく言うと、ソフトウェアにAPIという外部とやりとりする窓口を作り、外部アプリとコミュニケーションや連携ができる状態にする、ということ
 #### docker 環境構築
 docker これまで通り環境構築
 
+ポイントはdocker-compose.ymlにnetworks を記述する点
 Auth/Admin
   UserController
   LoginController
