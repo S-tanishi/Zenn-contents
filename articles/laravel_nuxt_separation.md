@@ -17,14 +17,16 @@ API Apprication Programing Interface
 「アプリケーション、ソフトウェア」と「プラグラム」をつなぐもの
 APIはソフトウェア同士を繋げます
 #### docker 環境構築
-docker これまで通り環境構築
+docker これまで通り環境構築(略)
 
 ポイントはdocker-compose.ymlにnetworks を記述する点
+
+networks: 
+
+その他
 Auth/Admin
   UserController
   LoginController
-
-docker-compose exec api php artisan make:controller Api\Admin\UserController
 
 Kernel.php(middleware-apiに追記)
 
