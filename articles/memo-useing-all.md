@@ -300,3 +300,6 @@ mkdir /var/log/php
 
 
 WebのセキュリティについてはSQLインジェクションとCSRFとXSSぐらい覚えておけばいいと思う。
+
+### cors 
+https://qiita.com/kobayashi-m42/items/c0a2609ae61a72dcc60f
