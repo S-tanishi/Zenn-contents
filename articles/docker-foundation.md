@@ -156,6 +156,14 @@ docker-compose up でコンテナを起動させた際に、
 
 https://knowledge.sakura.ad.jp/5736/
 
+### CMD ENTRYPOINT 違い
+ENTRYPOINT : 必ず実行
+CMD : デフォルトの引数
+
+コンテナを起動した際にbash(/bin/bashがコンテナ内で PID１として)が起動するのは
+CentOS用の Docker 公式イメージで/bin/bashを実行する命令があるから
+
+https://pocketstudio.net/2020/01/31/cmd-and-entrypoint/
 ### memo
 composerを早くするプラグイン
 http://blog.tojiru.net/article/432944706.html
