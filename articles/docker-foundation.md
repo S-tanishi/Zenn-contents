@@ -47,6 +47,8 @@ https://qiita.com/gounx2/items/23b0dc8b8b95cc629f32
 ２つのコンテナプロセスは別々に独立したファイル階層を持っている。
 名前空間がマウントしているから独立状態
 
+https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/
+
 **Dockerfile**
 Dockerfile はテキストファイルであり、イメージを作り上げるために実行するコマンドラインコマンドを、すべてこのファイルに含めることができる
 ```docker:
