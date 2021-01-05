@@ -303,3 +303,13 @@ WebのセキュリティについてはSQLインジェクションとCSRFとXSS�
 
 ### cors 
 https://qiita.com/kobayashi-m42/items/c0a2609ae61a72dcc60f
+
+### Cookie(session) 認証 Token認証 
+Cookie:
+Webサーバーが初めて接続した際に預けておく小さなファイル
+
+クライアントが初めて接続した際に
+Webサーバーがクライアントに対してCookieファイル（SessionID）を発行し、HTTPレスポンスのヘッダを利用して送ります。その際に発行されたSession情報（SessionID）にはログイン情報が含まれます。
+
+以後、クライアントがWebサーバーへアクセスした際は
+リクエストヘッダに含まれるCookie（SessionId）をサーバーが参照し、実際にサーバーに保存されているSession情報と合致した際に認証されたとみなされる。
