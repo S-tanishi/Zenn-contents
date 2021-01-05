@@ -319,3 +319,5 @@ SQLインジェクション
 不正なSQLを使って脆弱性のあるサイトにinjectionするってこと
 それにより
 データベースの改竄・漏洩が可能になる
+
+https://www.kagoya.jp/howto/network/sql-injection/
