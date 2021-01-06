@@ -8,45 +8,41 @@ published: false
 マニュアル
 https://emotion92.blog.fc2.com/blog-category-72-1.html
 
+スライド
+https://www.slideshare.net/zembutsu/what-isdockerdoing
+
 ### docker 
 "Docker allows you to package an application with all of its dependencies into a standardized unit for software development."
 
 全ての依存関係をパッケージ化して、コンテナとして動かす。
 
-パッケージ化するのは
-ルートディレクトリ以下、/bin /etc /var などの
-Linuxファイルシステム（メタ情報という）
-どのプロセスを自動事項するのか、ポートを公開するのかも含まれる
-それらをLinuxファイルシステムをdockerイメージとして
+・dockerイメージは、複数のレイヤの積み重ねで構成され、１つのファイルシステムとして使える
 
-dockerイメージは、その他仮想マシンイメージのように一つのファイルが存在するわけではなく、複数のレイヤの積み重ねで構成され、１つのファイルシステムとして使える
+・基本になるのは、ペースイメージと言われる様々なLinuxディストリビューションのファイルシステム（centOS,debian,ubuntuなど)
 
-基本になるのは、ペースイメージと言われる様々なLinuxディストリビューションのファイルシステム（centOS,debian,ubuntuなど)
-
-その上に複数のイメージレイヤ（層）が積み重なり
+・その上に複数のイメージレイヤ（層）が積み重なり
 コンテナを動かすための必要な依存関係をパッケージ化したものがdocker（読み込み専用）
 
-イメージ・レイヤは親子関係を持ち、見かけ上１つに見える
+・イメージ・レイヤは親子関係を持ち、見かけ上１つに見える
 
-コンテナ作成＝コンテナ用レイヤの作成
+・コンテナ作成＝コンテナ用レイヤの作成
 
 https://www.slideshare.net/zembutsu/what-isdockerdoing
 ### 基本
 dockerは Dockerfileからの命令を受け取り自動でイメージをビルドする
 
 #### ボリュームとは
-https://qiita.com/gounx2/items/23b0dc8b8b95cc629f32
+ボリュームとは、データを永続化できる場所のこと
 
-ボリュームとは、データを永続化できる場所のことである。
+・コンテナ内部にデータを保存しても、コンテナ破棄すると消えてしまう
 
-コンテナ内部にデータ(ファイル)を保存しても、コンテナ破棄すると消えてしまう。
-なので、データを永続化したいときは、コンテナの外にデータを置く必要がある。
-その場所のことを、ボリュームと呼ぶ。
+・データを永続化したいときは、コンテナの外にデータを置く必要がある
 
-２つのコンテナプロセスは別々に独立したファイル階層を持っている。
-名前空間がマウントしているから独立状態
+→その場所のことを、ボリュームと呼ぶ。
 
 https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/
+
+https://qiita.com/gounx2/items/23b0dc8b8b95cc629f32
 
 **Dockerfile**
 Dockerfile はテキストファイルであり、イメージを作り上げるために実行するコマンドラインコマンドを、すべてこのファイルに含めることができる
