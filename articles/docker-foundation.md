@@ -86,19 +86,21 @@ WORKDIR
 
 phpベースイメージ
 https://hub.docker.com/_/php
-### 文法
+### Service設定
 #### build
 build: で指定しているのはビルドコンテキストを指定
-build contextとは
+
+#### build context
 docker buildを実行する際の現在の作業ディレクトリのことを指す
 Dockerfileの場所 
 
-ports
+### ports
+DBのdockerimageを立ち上げる際のポート番号
 #### volumes: 
 ホスト側のディレクトリや名前付きボリュームをコンテナ側へマウントしたい時に指定します。
 ホストOSとコンテナ内でソースコードを共有
 
-例えて言うなら拡張データ領域
+ホスト側のディレクトリをキー、コンテナ側のディレクトリをバリューとして記述
 
 #### enviroment
 コンテナの環境変数を追加
@@ -173,3 +175,7 @@ $ composer global require hirak/prestissimo
 $ composer global remove hirak/prestissimo
 ```
 
+| Head | Head | Head |
+| ---- | ---- | ---- |
+| Text | Text | Text |
+| Text | Text | Text |
