@@ -83,6 +83,9 @@ $ docker-compose exec web yarn add @nuxtjs/auth @nuxtjs/axios @nuxtjs/proxy
 
 docker-compose exec web yarn add --dev sass sass-loader fibers
 
+nuxt.config.js
+ APIとの疎通設定
+
 token認証 Session認証
 
 Session認証はブラウザ側のクッキーにSessionIDもたせる処理だから
