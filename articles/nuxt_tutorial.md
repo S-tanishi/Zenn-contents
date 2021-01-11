@@ -20,6 +20,7 @@ https://ja.nuxtjs.org/docs/2.x/directory-structure/assets/
 components
 
 #### layput
+Nuxt.js アプリケーションのルック&フィールを変えるとき、とても役に立ちます。例えばサイドバーを含めたいときや、モバイルとデスクトップのための別々のレイアウトを持ちたいときなどに有用
 
 #### middleware
 
