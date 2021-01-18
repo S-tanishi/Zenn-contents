@@ -18,6 +18,9 @@ Git:分散型バーション管理システム
 
 https://tcd-theme.com/2019/12/what-is-git.html
 
+### git pull 
+リモートリポジトリからローカルのリポジトリへ変更を反映
+別の誰かがソース変更した内容を自分のリポジトリないに反映
 ### cp
 $ cp コピー元 コピー先
 $ cp fileA.txt dir/fileA_copy.txt
