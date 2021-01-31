@@ -5,8 +5,8 @@ type: "tech" # tech: 技術記事 / idea: アイデア
 topics: []
 published: false
 ---
-### v-calendar ライブラリ
-参考：https://qiita.com/kanary/items/442bd44c2896a534768b
+### プルリク
+https://qiita.com/matsukazu1112/items/1633e7392c827c03d533
 
 ### laravel nuxt.js 
 laravek Api
