@@ -16,11 +16,19 @@ Git:分散型バーション管理システム
 
 ローカル→add→インデックス→commit→ローカルリポジトリ→push→リモートリポジトリ
 
-https://tcd-theme.com/2019/12/what-is-git.html
-
 ### git pull 
 リモートリポジトリからローカルのリポジトリへ変更を反映
 別の誰かがソース変更した内容を自分のリポジトリないに反映
+
+### プルリク　（pull request)
+リポジトリに対して修正や機能追加を提案できる機能
+
+master branchを操作できるのは管理者のみ
+チーム開発の際は
+Branchを切り、別のBranchから、本番環境に対してプルリクを出し、採用となれば（マージ）、本番環境に反映、という流れ
+https://qiita.com/matsukazu1112/items/1633e7392c827c03d533
+
+
 ### cp
 $ cp コピー元 コピー先
 $ cp fileA.txt dir/fileA_copy.txt
