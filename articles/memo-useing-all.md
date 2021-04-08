@@ -5,9 +5,36 @@ type: "tech" # tech: 技術記事 / idea: アイデア
 topics: []
 published: false
 ---
-### プルリク
-https://qiita.com/matsukazu1112/items/1633e7392c827c03d533
+### 仕事
+通常のターミナルはzsh
+改造する場合　oh-my-zsh
 
+#### git 
+cat コマンド
+
+○ | pbcpy
+clone ~~ api でapiフォルダで作成
+
+zshrc
+
+#### 開発の流れ
+リモートブランチからまずは
+git pull　またはgit pull origin（リモートブランチから） ブランチ名
+ で最新化（他の方がpushしている場合があるので）
+
+次に
+git checkout  で新しいブランんちw￥作成
+#### vim
+/d 一行削除
+
+
+ショトカ系
+command 左(長押しでコマンド） en 右 jp
+controll space = alfred
+caps lock = controll
+### model
+boolean 完全に二択ならメンテ困らない
+integer 後に追加される場合、メンテ大変になってしまうから数字でデータを選べるように
 ### laravel nuxt.js 
 laravek Api
 ```php:routes/api.php 
