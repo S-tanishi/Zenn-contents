@@ -1,5 +1,5 @@
 ---
-title: "laravel[Seeder Factory]"
+title: "[laravel] Seeder Factory"
 emoji: "🐈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
