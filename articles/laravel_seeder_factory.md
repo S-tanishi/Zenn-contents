@@ -1,20 +1,19 @@
 ---
-title: "[laravel] Seeder Factory"
+title: "[Laravel] Seeder Factory　サンプル"
 emoji: "🐈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
 published: true
 ---
 ## Seeder
-### sample
-```php:DatabaseSeeder
+```php:DatabaseSeeder.php
 public function run()
 {
     // 追記
     $this->call(TestUsersTableSeeder::class);
 }
 ```
-```php:SampleSeeder
+```php:SampleSeeder.php
 public function run()
     {
         DB::table('users')->insert([
@@ -60,7 +59,7 @@ https://github.com/orangehill/iseed/issues/4
 ライブラリ見ればわかるけど、この問題（DB保存の話、仕組み）にぶち当たる
 https://terasoluna-batch.github.io/guideline/current/ja/Ch05_Transaction.html
 
-## factory
+## Factory
 ```php:Sample.php
 class Contact extends Model
 {
