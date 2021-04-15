@@ -6,7 +6,7 @@ topics: [laravel]
 published: true
 ---
 実務でlaravelを使って開発をする際、頻繁に使用するので簡単にまとめてみました。
-## Formファザード:laravelcollective/html
+## Formファザード
 https://github.com/LaravelCollective/html
 ```
 composer require laravelcollective/html
@@ -77,10 +77,10 @@ valに配列を選択すると自動でやってくれる。
 
 選択してください系はutilityなどでgetTargetColumnSortAssocなど作成し、id,nameに加工したあとわたすとよし
 ### valをおくりたいとき
-```
+```php:
 <select class="select-style" id="hoge_time" name="hoge_time">
 @foreach($hogeTimes as $key => $val)
-  @if($val == old('hoge_time', $event->reserve_time))
+  @if($val == old('hoge_time', $hoge->hoge_time))
     <option value="{{ $val }}" selected>{{ $val }}</option>
   @else
     <option value="{{ $val }}">{{ $val }}</option>
