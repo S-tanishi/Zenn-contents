@@ -10,18 +10,18 @@ https://github.com/LaravelCollective/html
 ```
 composer require laravelcollective/html
 ```
-config\app.php にあるエイリアスの項目を見るとデフォルトで実装されているファサードが確認できる。
-vendorに詳しく書いてある
 ## 基本
 ```
 {{ Form::○○(どこに作用するか(送るでデータ、key), 実際に送るデータ(value),オプション(特殊な加工),オプション) }}
 ```
 ### old関数 
+```
 old(前sessionのデータ(input=nameに該当),初期値)
+```
 Webのフォームは一時的に情報を残すsessionの仕組みがある。
 でold関数はそれを取り出す、つまり前の情報を取り出す役目がある
 ### formを作る際の骨格
-```php:form
+```php:
 {{ Form::open(['route' => ['task.store'], 'method' => 'post']) }}
 @csrf
 @method('post')
