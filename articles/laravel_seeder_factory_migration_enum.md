@@ -114,9 +114,9 @@ $table->foreign('hoge_id')->references('id')->on('hoges')->onDelete('cascade');
 ・中間テーブルからみたら、N対1であるのでもたせ方は割愛
 ・中間テーブルのcreated_at updated_atタイムスタンプを自動的に保守
 ```php:Hoge.php(N対N model)
-public function contactInterests(): BelongsToMany
+public function userInterests(): BelongsToMany
 {
-    return $this->belongsToMany('App\Models\ContactInterest')->withTimestamps();
+    return $this->belongsToMany('App\Models\UserInterest')->withTimestamps();
 }
 ```
 ### リレーションデータの保存処理
@@ -129,11 +129,11 @@ public function contactInterests(): BelongsToMany
 処理：DB側で全てインスタンス化した上で検索をかけ、持ってくる（DB内で展開
 ORMはサーバー側で負担になり、最悪落ちる。
 ### 例
-```
+```php:
 // APP側で処理
-$works  = Work::query()->with('workImages')->get()->sortByDesc('sort_no')->take(6);
+$hoges  = Work::query()->with('hogeImages')->get()->sortByDesc('id')->take(6);
 // DB側
-$works = Work::query()->with('workImages')->orderBy('sort_No')->limit(6)->get();
+$hoges = Work::query()->with('hogeImages')->orderBy('id')->limit(6)->get();
 ```
 orderBy　： SQl側で処理をする場合
 sortBy　   ：collection側で処理をする場合
@@ -166,18 +166,5 @@ Add [interest] to fillable property to allow mass assignment on [App\Models\Inte
 ```
 // Aなどはモデルのメソッド名に対応している
 User::query->with(['A.B.C', 'A', 'B']);
-$user = User::query->with(['city.estate', 'shop' )]
 ```
 A.B.C：```RailsCompany-- Rails-- station```のような３つに渡るデータを取得したいときに指定する
-### リレーションの先のリレーション　値の取得
-```RailsCompany-- Rails-- station```の関係を持つデータがある。このときRailsCompanyからstationを表示するにはどうすればいいのか？
-```php:
-// 不正解
-$RailsCompany->Rails->station->name   
-// 正解
-foreach ($staffs as $staff) {
-   dump($staff->staffPost->name);
-}
-dd('end');
-```
-理由：staffsのコレクションがあるわけではなく、staff単位のコレクションで存在していてリレーションがかかっているため。
