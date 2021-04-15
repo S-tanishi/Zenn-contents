@@ -1,5 +1,5 @@
 ---
-title: "[Laravel] Seeder Factory　サンプル"
+title: "[Laravel] Seeder Factory Migration　キホンとサンプル"
 emoji: "🐈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
@@ -88,3 +88,36 @@ class UserFactory extends Factory
     }
 }
 ```
+
+## migration 
+### リレーション
+```
+1 : 1   hasOne      1 : n   hasMany      n:1     belongsTo        n : n   belongsToMany
+```
+- n:n の場合はそのまま表示するのが難しいので仮想的に1:n (or n:1)の関係を作る必要がある
+→中間テーブルの作成
+- work-staffのリレーションの場合work_staffでは通らない。staff_workで通る（ddで見ろ）
+
+判断に迷う場合はその項目と相手に対し何本線を結ぶかが結ばれるか、で判定するとわかりやすい。
+### リレーションテーブル命名ルール
+- アルファベット順
+- snake_caseで
+- テーブル名の 単数形 を繋げる
+### キーのもたせ方
+・従テーブルで主テーブルを参照するために使われるキーを外部キーと呼ぶ。(1対n)
+```php:create_hoge_images_table.php(1対N)
+$table->bigInteger('hoge_id')->unsigned();
+// 外部キー制約
+$table->foreign('hoge_id')->references('id')->on('hoges')->onDelete('cascade');
+```
+
+・中間テーブルからみたら、N対1であるのでもたせ方は割愛
+・中間テーブルのcreated_at updated_atタイムスタンプを自動的に保守
+```php:Hoge.php(N対N model)
+public function contactInterests(): BelongsToMany
+{
+    return $this->belongsToMany('App\Models\ContactInterest')->withTimestamps();
+}
+```
+### リレーションデータの保存処理
+- N対N　：saveのときにsyncメソッドをつける
