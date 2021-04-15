@@ -2,7 +2,7 @@
 title: "[Laravel] Form ファザード"
 emoji: "👌"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [laravel]
+topics: [php, laravel]
 published: true
 ---
 実務でlaravelを使って開発をする際、頻繁に使用するので簡単にまとめてみました。
