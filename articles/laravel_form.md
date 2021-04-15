@@ -107,7 +107,7 @@ nameとvalueで指定した値が一組になって送信される
 ```php:
 @foreach(EnumHoge::IS_HOGE as $key => $val)
   <li class="form-check">
-    {{ Form::radio('is_hoge', $key, ($key === old('is_hoge')), ['id' => 'is_hoge'.$key, 'class' => 'form-check-label' required' => 'required']) }}
+    {{ Form::radio('is_hoge', $key, ($key === old('is_hoge')), ['id' => 'is_hoge'.$key, 'class' => 'form-check-label' 'required' => 'required']) }}
     {{ Form::label('is_hoge'.$key, $val) }}
   </li>
 @endforeach
@@ -156,7 +156,7 @@ $fuga = ($hoge == 1)  if文は省略できる
   @endforeach
 </div>
 ```
-```html:表で使うようなパーツ/inarrayの引数の仕様でこうなる。
+```php:表で使うようなパーツ/inarrayの引数の仕様でこうなる。
 @foreach(EnumHoge::INTERESTS as $key => $val)
   <li class="form-box__harf-layout__item">
     {{ Form::checkbox('interests[]', $key, (is_array(old('interests')) && in_array($key, old('interests'))) ? 'checked="checked"' : '' , ['id' => 'interest'.$key, 'required' => 'required']) }}
@@ -167,7 +167,7 @@ $fuga = ($hoge == 1)  if文は省略できる
 第一： name属性　第二：value値　第三：デフォルトの checked　第四：追加属性（連想配列形式）
 
 こいつにはonoff 機能がなく、on機能しかない。
-→　コントローラー側で処理を加えないといけない。
+→コントローラー側で処理を加えないといけない。
 false値を渡して、onのときにtrueになる処理を加えるとこの問題をクリアできる
 
 その際の共通処理は分けて考えるといいよね(privateで
@@ -181,7 +181,7 @@ $hoge = self::setDefaultValueForSave($hoge)
 ## 画像のアップロード
 input type=fileだけでは送信できない。
 enctype属性の関係上
-```
+```php:
 {{ Form::open(['route' => ['hoge.store'], 'method' => 'post', 'files' => true]) }}
 ```
 としないと送信されない（セキュリティ対策
