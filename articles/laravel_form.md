@@ -1,5 +1,5 @@
 ---
-title: "[Laravel form]"
+title: "[Laravel] Form ファザード"
 emoji: "👌"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
