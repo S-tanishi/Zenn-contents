@@ -5,7 +5,7 @@ type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
 published: true
 ---
-実務でlaravelの開発をする際、頻繁に使用するので簡単にまとめてみました。
+実務でlaravelを使って開発をする際、頻繁に使用するので簡単にまとめてみました。
 ## Formファザード:laravelcollective/html
 https://github.com/LaravelCollective/html
 ```
@@ -13,15 +13,16 @@ composer require laravelcollective/html
 ```
 ## 基本
 ```
-{{ Form::○○(どこに作用するか(送るでデータ、key), 実際に送るデータ(value),オプション(特殊な加工),オプション) }}
+{{ Form::○○(name属性, value属性,[オプション]) }}
 ```
 ### old関数 
 ```
-old(前sessionのデータ(input=nameに該当),初期値)
+old(前sessionのデータ,初期値)
 ```
 Webのフォームは一時的に情報を残すsessionの仕組みがある。
 でold関数はそれを取り出す、つまり前の情報を取り出す役目がある
 ### validation error
+エラー文面をコンポーネント化してあると良い
 ```php:
 @includeWhen($errors->get('name'), '._components.validation_error', ['errors' => $errors->get('name')])
 ```
