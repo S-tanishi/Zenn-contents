@@ -12,11 +12,11 @@ https://github.com/LaravelCollective/html
 composer require laravelcollective/html
 ```
 ## 基本
-```
-{{ Form::○○(name属性, value属性,[オプション]) }}
+```php:
+{{ Form::○○('name属性', 'value属性',['オプション']) }}
 ```
 ### old関数 
-```
+```php:
 old(前sessionのデータ,初期値)
 ```
 Webのフォームは一時的に情報を残すsessionの仕組みがある。
@@ -51,14 +51,14 @@ Webのフォームは一時的に情報を残すsessionの仕組みがある。
 ## textarea
 ```php:
 // <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-{{ Form::textarea('question1', old('question1', $hoge->question1 ?? ''), ['class' => 'form-control', 'rows' => '3']) }}
+{{ Form::textarea('description', old('description', $hoge->description ?? ''), ['class' => 'form-control', 'rows' => '5']) }}
 ```
 ```php:サニタイズver：そのまま送るとJsが動いてしまうような特殊記号（=, ?など)をHTMLに変換
 {!! Form::textarea('message', old('message', $hoge->message ?? ''), ['class' => 'form-control', 'rows' => '5']) !!}
 ```
 第一：name 　第二：value
 なお改行データは |n と送られるので、取得するときにはn｜2brを使って変換する必要がある
-```
+```php:
 {!! nl2br($hoge->message) !!}
 ```
 ## select 
