@@ -5,7 +5,8 @@ type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
 published: true
 ---
-## Formファザード    laravelcollective/html
+実務でlaravelの開発をする際、頻繁に使用するので簡単にまとめてみました。
+## Formファザード:laravelcollective/html
 https://github.com/LaravelCollective/html
 ```
 composer require laravelcollective/html
@@ -20,6 +21,10 @@ old(前sessionのデータ(input=nameに該当),初期値)
 ```
 Webのフォームは一時的に情報を残すsessionの仕組みがある。
 でold関数はそれを取り出す、つまり前の情報を取り出す役目がある
+### validation error
+```php:
+@includeWhen($errors->get('name'), '._components.validation_error', ['errors' => $errors->get('name')])
+```
 ### formを作る際の骨格
 ```php:
 {{ Form::open(['route' => ['task.store'], 'method' => 'post']) }}
@@ -36,7 +41,7 @@ Webのフォームは一時的に情報を残すsessionの仕組みがある。
 ```
 ## text
 ```php:
-@includeWhen($errors->get('name'), '._components.validation_error', ['errors' => $errors->get('name')])
+// <input type="text" class="form-control" placeholder="例）たにし 太郎">
 {{ Form::text('name', old('name', $hoge->name ?? ''), ['placeholder' => '例）たにし 太郎','class' => 'form-control', 'required' => 'required']) }}
 ```
 ```php:
@@ -51,7 +56,7 @@ Webのフォームは一時的に情報を残すsessionの仕組みがある。
 {!! Form::textarea('message', old('message', $hoge->message ?? ''), ['class' => 'form-control', 'rows' => '5']) !!}
 ```
 第一：name 　第二：value
-なお改行データは |n と送られるので、取得するときにはhpのn｜2brを使って変換する必要がある
+なお改行データは |n と送られるので、取得するときにはn｜2brを使って変換する必要がある
 ```
 {!! nl2br($hoge->message) !!}
 ```
