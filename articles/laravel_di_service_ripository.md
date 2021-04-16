@@ -6,8 +6,8 @@ topics: [laravel, php]
 published: true
 ---
 ## laravel　分離
-- controller 　　　　　→　fatcontroller
-- model (public以降)　→  fatModel
+- fatcontroller
+- fatModel
 - リポジトリパターン（Serviceと別に
 ## リポジトリパターン
 説明はデータの操作に関連するロジックを切り離し、別の抽象化したレイヤに任せることで
@@ -35,8 +35,9 @@ facade登録すればbladeでも使える（＝　Helper）
 ただ会社によってはUtility禁止令など発令しているので考えて使うべき。
 ## 流れ
 フロントとバックを分離した場合で考えてみる。よくある画像登録でのざっくりとした動きを見てみる。
-## Interface設計s
-クラスから"ユーザー定義型"の能力のみを分離した言語機構。PHPのそれはJavaのinterfaceのパクリ。
+## Interface設計
+クラスから"ユーザー定義型"の能力のみを分離した言語機構。
+Javaのinterfaceのパクリのようなもの。
 インスタンス化できないクラスの出来損ない
 ```php:HogeImageRepositoryInterface
 interface HogeImageRepositoryInterface
@@ -44,10 +45,9 @@ interface HogeImageRepositoryInterface
     public function getImages(int $hogeId): Collection;
 
     public function create(array $params): HogeImage;
-
 }
 ```
-実装を変える場合、ORMで所得するパターン/クエリビルダで取得する
+実装を変える場合、ORMで取得するパターン/クエリビルダで取得する
 実装のパターンを変更する際に進化を発揮。
 ## サービスコンテナに登録（詳しくは下記)
 ```php:app/Providers/RepositoryServiceProvider.php
@@ -96,10 +96,10 @@ public function register()
    $this->app->bind('hogeImage', HogeImage::class);
 }   
 ```
-複雑な依存関係の場合、エラーをこきますが、シンプルなものに限って定義しなくても動いてしまいます。
+複雑な依存関係の場合エラーをこくが、シンプルなものに限って定義しなくても動いてしまう。
 わからないのに動作する理由は以下のサイト様に詰まっています。
 
-サービスコンテナについて非常にまとまっているので是非こちらもあわせて確認してみてください。
+サービスコンテナについて非常にまとまっているので是非こちらも確認してみてください。
 https://reffect.co.jp/laravel/laravel-service-container-understand
 ## Service
 ```php:
@@ -215,12 +215,12 @@ public function create(Request $request): JsonResponse
 }
 ```
 
-##　まとめ
+## まとめ
 正直このレベルだと負債にしかならないけど、
-こんな感じで作っていき、仮にほぼ同じ画像登録処理を使い回すのならserviveま全体を抽象化するなりすると
+仮にほぼ同じ画像登録処理を使い回すのならserviveま全体を抽象化するなりすると
 保守のコスト削減や可読性があがりますよね。エラー検証はログを確認すればいいし。
 
-個人的にはサービスコンテナを理解していないと無駄なことだらけになりそうな気がしますが。。]
+個人的にはサービスコンテナを理解していないと無駄なことだらけになりそうな気がします。。
 あとはメンバーの力量が違いすぎると逆にマイナスになる事例を聞いたりと。。
 
 短期的な工数はかかりますが上回るメリットがあればガンガン書いていきたいところですね。
