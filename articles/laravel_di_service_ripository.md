@@ -6,7 +6,7 @@ topics: [laravel, php]
 published: true
 ---
 ## laravel　分離
-１　controller 　　　　　→　fatcontroller
+　controller 　　　　　→　fatcontroller
 ２　model (public以降)　→  fatModel
 ３　リポジトリパターン（Serviceと別に
 
@@ -18,29 +18,25 @@ published: true
 
 リポジトリにデータ操作を集中することで複雑になりすぎたテーブル更新やバグが発生しやすい処理など
 分離、抽象化によってメリットを得ることを目的としている。
-なので対象クラスが増加することに対してメリットのほうが多ければ採用すべき。
+なのでクラスが増加することに対してメリットのほうが多ければ採用すべき。
 
 >ただ、おそらくリポジトリに分けるだけでは効果が薄くて
 controller, service, repository, interfaceに分けたほうが進化を発揮すると
 そしてserviceに抽象化処理を書くこととテストなどの関係で長期的に見て恩恵がある思想だと私達のチームでは認識している。
-当然、1対1対1対1ではないs
-
-app\provider\RepositoryProviderに記述
-
+当然、1対1対1対1ではない。
 ## DI:Dependency Injection
 クラスのインスタンスを一括で済むようにしたもの。
 laravel ではサービスコンテナと呼ぶ
 サービスコンテナにインスタンス生成方法を結び付けて利用する。
 
-ex)Utility　：あらゆるところで使う処理をまとめている（欄要注意）
+ex)Utility
+あらゆるところで使う処理をまとめている（欄要注意）
 facade登録すればbladeでも使える（＝　Helper）
 
 ただ会社によってはUtility禁止令など発令しているので考えて使うべき。
 ## 流れ
-フロントとバックを分離した場合で考えてみる。よくある画像登録での動きを見てみる。
-
-説明のためバック側の処理(一覧と作成)しか記述していないけど、温度感として。
-## Interface設計
+フロントとバックを分離した場合で考えてみる。よくある画像登録でのざっくりとした動きを見てみる。
+## Interface設計s
 クラスから"ユーザー定義型"の能力のみを分離した言語機構。PHPのそれはJavaのinterfaceのパクリ。
 インスタンス化できないクラスの出来損ない
 ```php:HogeImageRepositoryInterface
