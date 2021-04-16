@@ -6,10 +6,9 @@ topics: [laravel, php]
 published: true
 ---
 ## laravel　分離
-　controller 　　　　　→　fatcontroller
-２　model (public以降)　→  fatModel
-３　リポジトリパターン（Serviceと別に
-
+1. controller 　　　　　→　fatcontroller
+2. model (public以降)　→  fatModel
+3. リポジトリパターン（Serviceと別に
 ## リポジトリパターン
 説明はデータの操作に関連するロジックを切り離し、別の抽象化したレイヤに任せることで
 拡張性や保守性を高める。。といわれているが所感としては
