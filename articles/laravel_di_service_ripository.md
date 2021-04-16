@@ -1,9 +1,9 @@
 ---
-title: "[Laravel] 分離/DI/リポジトリパターン"
+title: "[Laravel] DI/リポジトリパターン"
 emoji: "🌊"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [laravel]
-published: false
+topics: [laravel, php]
+published: true
 ---
 ## laravel　分離
 １　controller 　　　　　→　fatcontroller
@@ -22,17 +22,16 @@ published: false
 
 >ただ、おそらくリポジトリに分けるだけでは効果が薄くて
 controller, service, repository, interfaceに分けたほうが進化を発揮すると
-そしてserviceに抽象化処理を書くことで長期的に見て恩恵がある思想だと私達のチームでは認識している。
-当然、1対1対1対1ではない
+そしてserviceに抽象化処理を書くこととテストなどの関係で長期的に見て恩恵がある思想だと私達のチームでは認識している。
+当然、1対1対1対1ではないs
 
 app\provider\RepositoryProviderに記述
 
 ## DI:Dependency Injection
 クラスのインスタンスを一括で済むようにしたもの。
 laravel ではサービスコンテナと呼ぶ
-実際のコーディングではサービスコンテナにインスタンス生成方法を結び付けて利用
+サービスコンテナにインスタンス生成方法を結び付けて利用する。
 
-つまり抽象的なことを行っている。
 ex)Utility　：あらゆるところで使う処理をまとめている（欄要注意）
 facade登録すればbladeでも使える（＝　Helper）
 
@@ -41,7 +40,7 @@ facade登録すればbladeでも使える（＝　Helper）
 フロントとバックを分離した場合で考えてみる。よくある画像登録での動きを見てみる。
 
 説明のためバック側の処理(一覧と作成)しか記述していないけど、温度感として。
-### Interface設計
+## Interface設計
 クラスから"ユーザー定義型"の能力のみを分離した言語機構。PHPのそれはJavaのinterfaceのパクリ。
 インスタンス化できないクラスの出来損ない
 ```php:HogeImageRepositoryInterface
@@ -55,8 +54,12 @@ interface HogeImageRepositoryInterface
 ```
 実装を変える場合、ORMで所得するパターン/クエリビルダで取得する
 実装のパターンを変更する際に進化を発揮。
-
-### Repository
+## サービスコンテナに登録（詳しくは下記)
+```php:app/Providers/RepositoryServiceProvider.php
+// 略(register内)
+$this->app->bind(HogeImageRepositoryInterface::class, HogeImageRepository::class);
+```
+## Repository
 値の取得のみ行うようにしている
 ```php:
 /**
@@ -89,7 +92,21 @@ public function create(array $params = []): hogeImage
     return $hogeImage;
 }
 ```
-### Service
+## Service Provider
+サービスコンテナに入れ管理(自動で依存関係が解決)するために登録
+```php:app/Providers/AppServiceProvider.php
+public function register()
+{
+   // 略
+   $this->app->bind('hogeImage', HogeImage::class);
+}   
+```
+複雑な依存関係の場合、エラーをこきますが、シンプルなものに限って定義しなくても動いてしまいます。
+わからないのに動作する理由は以下のサイト様に詰まっています。
+
+サービスコンテナについて非常にまとまっているので是非こちらもあわせて確認してみてください。
+https://reffect.co.jp/laravel/laravel-service-container-understand
+## Service
 ```php:
 class hogeImageService
 {
@@ -172,8 +189,8 @@ public function uploadFileToS3(int $id, string $uploadTo, Request $request): str
 // protectedで宣言、constructでutilityなどサービスを読み込んだ上で
 $path = $this->utility->uploadFileToS($id, $this->uploadTo, $request);
 ```
-### コントローラー
-あとは引き出して渡すだけ
+## コントローラー
+コントローラーは値を渡すだけ
 ```php:
 protected $hogeImageService;
 
@@ -202,14 +219,13 @@ public function create(Request $request): JsonResponse
     return $this->hogeImageService->create($request);
 }
 ```
-https://qiita.com/mikesorae/items/ff8192fb9cf106262dbf
 
-### Service Provider
-App/Providers/AppServiceProvider.phpにインターフェースと実装クラスを登録
-```
-public function register()
-{
-   // 略
-   $this->app->bind('news_category', NewsCategoryService::class);
-}   
-```
+##　まとめ
+正直このレベルだと負債にしかならないけど、
+こんな感じで作っていき、仮にほぼ同じ画像登録処理を使い回すのならserviveま全体を抽象化するなりすると
+保守のコスト削減や可読性があがりますよね。エラー検証はログを確認すればいいし。
+
+個人的にはサービスコンテナを理解していないと無駄なことだらけになりそうな気がしますが。。]
+あとはメンバーの力量が違いすぎると逆にマイナスになる事例を聞いたりと。。
+
+短期的な工数はかかりますが上回るメリットがあればガンガン書いていきたいところですね。
