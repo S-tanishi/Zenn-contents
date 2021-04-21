@@ -1,6 +1,6 @@
 ---
 title: "React"
-emoji: "😊"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [react]
 published: false
@@ -10,6 +10,9 @@ published: false
 
 公式
 https://nextjs-ja-translation-docs.vercel.app/docs/getting-started
+## Reactとはなんぞや
+```
+
 
 ## それぞれの特徴
 Vue.js/Nuxt.js
@@ -55,6 +58,8 @@ bootstrap　導入
 ```_app.js
 import 'bootstrap/dist/css/bootstrap.min.css'
 ```
+https://react-bootstrap.github.io/components/navbar/
 
 
-
+Hookを使うべき6つの理由
+https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04
