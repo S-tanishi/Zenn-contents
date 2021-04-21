@@ -1,6 +1,6 @@
 ---
 title: "フロントとバックの分離"
-emoji: "🌊"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel, nuxt.js]
 published: false

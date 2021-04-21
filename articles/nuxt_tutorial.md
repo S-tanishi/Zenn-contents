@@ -1,6 +1,6 @@
 ---
 title: "Nuxt.js　基礎"
-emoji: "💭"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [nuxt]
 published: false

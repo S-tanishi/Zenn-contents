@@ -1,6 +1,6 @@
 ---
 title: "php 基礎"
-emoji: "🦔"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [php]
 published: false

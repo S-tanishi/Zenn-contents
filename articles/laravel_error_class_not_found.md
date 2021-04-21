@@ -1,6 +1,6 @@
 ---
 title: "laravel8系でclassがあるのにerorr class 'xxx' not found"
-emoji: "🐥"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
 published: true

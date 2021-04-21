@@ -1,6 +1,6 @@
 ---
 title: "[Laravel] Seeder Factory Migration Enum キホン"
-emoji: "🐈"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [php, laravel]
 published: true

@@ -1,6 +1,6 @@
 ---
 title: "[Laravel] DI/リポジトリパターン"
-emoji: "🌊"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel, php]
 published: true

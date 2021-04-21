@@ -1,6 +1,6 @@
 ---
 title: "form"
-emoji: "🌊"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [html, php]
 published: true

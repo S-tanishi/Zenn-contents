@@ -39,13 +39,22 @@ https://ja.reactjs.org/docs/hooks-overview.html
 一言でいうと、関数コンポーネントでstate管理ができるようになった。
 
 導入以前
-関数コンポーネントにstateをもたせることができなかった。
+関数コンポーネントに状態管理/ライフサイクルをもたせることができなかった。
 class コンポーネントに書いていて
 
 state参照にthisを使ったり、メソッドにbindしていたり
 それらを行うconstructorを書いたり、renderしたりした。
 
+基本的にフックを使用していき、場合によってはクラス型で書いていくことになる。
 
+
+bootstrap　導入
+```
+ yarn add bootstrap bootstrap-react
+```
+```_app.js
+import 'bootstrap/dist/css/bootstrap.min.css'
+```
 
 
 

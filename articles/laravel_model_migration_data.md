@@ -1,6 +1,6 @@
 ---
 title: "model&migrationによるデータの扱い"
-emoji: "✨"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [laravel]
 published: true

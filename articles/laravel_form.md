@@ -1,6 +1,6 @@
 ---
 title: "[Laravel] Form ファザード"
-emoji: "👌"
+emoji: "🐚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [php, laravel]
 published: true
