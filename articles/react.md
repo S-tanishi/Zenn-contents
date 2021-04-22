@@ -62,4 +62,16 @@ https://react-bootstrap.github.io/components/navbar/
 
 
 Hookを使うべき6つの理由
+https://tyotto-good.com/blog/react-hooks
 https://blog.bitsrc.io/6-reasons-to-use-react-hooks-instead-of-classes-7e3ee745fe04
+
+
+async 非同期関数を定義する関数宣言のこと
+https://qiita.com/soarflat/items/1a9613e023200bbebcb3
+
+fetch API
+>リクエストやレスポンスといったHttpのパイプラインを構成する要素を操作できるように
+https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+・元々XMLHttpRequestを使用していた
+　・サーバーと対話するためのもの
+　　・それらXMLHttpRequestを使って複雑で動的なwenページを構築するプログラミング手法のことをAJAXという
