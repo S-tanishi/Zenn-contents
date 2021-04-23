@@ -75,3 +75,5 @@ https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
 ・元々XMLHttpRequestを使用していた
 　・サーバーと対話するためのもの
 　　・それらXMLHttpRequestを使って複雑で動的なwenページを構築するプログラミング手法のことをAJAXという
+
+
