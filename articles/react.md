@@ -77,3 +77,40 @@ https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
 　　・それらXMLHttpRequestを使って複雑で動的なwenページを構築するプログラミング手法のことをAJAXという
 
 
+### 概要
+Reactを調査したのでメモ
+ 
+### [Vue](https://jp.vuejs.org/v2/guide/installation.html) を採用するといい場合
+・技術の分離
+・デザイナーがHTMLとCSSを担当していて、その作業を行う場合
+　　・それまで通りの作業をして、JSに精通するエンジニアにバトンタッチする開発
+・機能を実現する程度の部分的なフロント開発
+・採用、育成　◎
+
+### [React](https://ja.reactjs.org/)
+・[関心の分離](https://ja.wikipedia.org/wiki/%E9%96%A2%E5%BF%83%E3%81%AE%E5%88%86%E9%9B%A2)
+・はやさ、軽さ、パフォーマンス優先
+・堅牢性　TypeScriptとの相性○
+・採用、育成　△　
+>Reactはjsxに設計構想 / 方針についての深い理解がないとそもそも触れない
+### Vue3
+Vue.3.0で導入されるコンポーネントを書くための新しいAPI。
+React Hookから影響を受けていて、以下の2点が大きく変わる。
+
+・TypeScriptの全面的サポート
+・ロジックの関心をベースにコードを構造化できるようになる
+> Reactはライフルサイクルメソッドがもたらした機能的凝集度の低さをhookによって克服し、SoCを実現している
+
+#### 具体例
+現状：Options-based API
+>「このコンポーネントはdataを2つ持っていて、methodを3つ持っていて...」という書き方になり、コードが断片的になってしまいます。あるロジックを変更しようとした時、コンポーネントファイル中に散らばる関係各所に影響が出る可能性が高くなってしまいます。特に、コンポーネントが複雑になるほど変更しづらくなってしまう。
+
+Vue３：Composition API
+>「このコンポーネントがしようとしていることは、X, YとZということです。」
+という書き方ができるようになり、ロジックが何をしたいのかということをベースにコードを書けるようになるとのこと。
+
+https://labo.nozomi.bike/article/78
+https://qiita.com/102Design/items/ae018dc80a4d879d92a8
+
+### tutorial
+https://ja.reactjs.org/tutorial/tutorial.html#passing-data-through-props
