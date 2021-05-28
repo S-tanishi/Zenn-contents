@@ -110,4 +110,4 @@ Vue３：Composition API
 という書き方ができるようになり、ロジックが何をしたいのかということをベースにコードを書けるようになるとのこと。
 
 https://labo.nozomi.bike/article/78
-https://qiita.com/102Design/items/ae018dc80a4d879d92a
+https://qiita.com/102Design/items/ae018dc80a4d879d92a8
