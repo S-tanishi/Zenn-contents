@@ -6,6 +6,11 @@ topics: ["php", "cakephp","docker", "nginx", "postgresql"]
 published: true
 ---
 
+## 概要
+すんなり環境構築ができる記事が少なかったため、手順書として共有しています。
+とは言ってもいつも使っているLaravel構成のnginxとphpの設定をcake用にいじっただけですがw
+誰かのお役に立てると幸いです。
+
 ### 前提
 ```
 php-fpm: 7.4
